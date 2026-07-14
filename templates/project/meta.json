@@ -1,0 +1,17 @@
+{
+  "title": "{书名}",
+  "author": "{作者名}",
+  "genre": "{类型}",
+  "sub_genre": "{子类型}",
+  "style": "{风格标签}",
+  "target_platform": "{目标平台}",
+  "target_words": {总目标字数},
+  "created_at": "{ISO日期}",
+  "updated_at": "{ISO日期}",
+  "status": "planning",
+  "total_chapters": 0,
+  "completed_chapters": 0,
+  "current_words": 0,
+  "synopsis": "{一句话简介}",
+  "tags": []
+}
