@@ -27,6 +27,7 @@
 读取 `workspace/stories/{name}/tracking/character-status.md`。
 
 确认本章涉及角色的当前状态：
+- 是否有台账中不存在的新角色登场，如有，则需要先加载`characters.md`完成角色设计
 - 上次登场章节和状态（受伤？疲劳？情绪？）
 - 当前能力/阶位/装备
 - 当前人际关系温度
@@ -62,7 +63,7 @@
 
 ### 7. 可用工具及模块
 
-`consistency_review`模块，用于去 AI 味，在写初稿前加载，根据指示避免 AI 味。
+`consistency_review`模块，用于去 AI 味，在写初稿前加载。
 
 ---
 
