@@ -1,6 +1,6 @@
 # 角色卡（模板）
 
-> **用法**：复制到 `workspace/stories/{name}/tracking/characters.md`，每个角色一份。阶段 03 产出，阶段 08 更新。
+> **用法**：复制到 `workspace/novels/{name}/tracking/characters/`文件夹中，文件命名方式为[角色名]-[角色层级]，如：唐三-L4，每个角色一份。阶段 03 产出，阶段 08 更新。
 > **性质**：动态权威。每章定稿后更新登场记录和状态变化。
 
 ---
