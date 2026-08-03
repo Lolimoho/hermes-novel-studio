@@ -35,7 +35,7 @@
 
 ### 3. 检查进度文档
 
-读取 `workspace/stories/{name}/tracking/progress.md`。确认：
+读取 `workspace/novels/{name}/tracking/progress.md`。确认：
 - 当前时间线（本章日期）
 - 已埋未收的伏笔（本章是否该收？）
 - 开放线索（本章是否该推进？）
@@ -56,7 +56,7 @@
 
 ### 5. 检查外部系统
 
-读取 `workspace/stories/{name}/rules.md`，检查是否配置了外部记忆/追踪系统。如有，在写作前按 `rules.md` 中的指令查询相关信息（如语义召回当前进度、角色状态、最近事件等）。
+读取 `workspace/novels/{name}/rules.md`，检查是否配置了外部记忆/追踪系统。如有，在写作前按 `rules.md` 中的指令查询相关信息（如语义召回当前进度、角色状态、最近事件等）。
 
 ### 6. 检查章首格式
 
@@ -157,7 +157,7 @@ POV：[视角角色]
 
 以下三项全部满足，本阶段才算完成：
 
-- [ ] 章节文件已写入 `workspace/stories/{name}/content/chXX-draft.md`（非空）
+- [ ] 章节文件已写入 `workspace/novels/{name}/content/chXX-draft.md`（非空）
 - [ ] 写后自查八项全部通过
 - [ ] 准备进入阶段 06-修订审稿（加载 `references/phases/06-revision.md`）
 
