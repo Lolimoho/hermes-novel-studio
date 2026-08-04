@@ -17,7 +17,7 @@
 
 ---
 
-# 一、交付物：角色卡模板
+## 一、交付物：角色卡模板
 
 > 模板文件：`templates/character-sheet.md`。复制到 `workspace/novels/{name}/tracking/characters/[角色名].md`，按层级裁减。
 >
@@ -40,7 +40,7 @@
 
 ---
 
-# 二、操作流程
+## 二、操作流程
 
 ## 角色层级与填写深度
 
@@ -244,7 +244,7 @@ L4 必填。填写压力下反应 / 对陌生人态度 / 对亲近人态度 / �
 
 ## Step 11: 录入
 
-写入 `tracking/characters/[角色名].md`（复制 `templates/character-sheet.md`，按层级裁减）。
+写入 `workspace/novels/{name}/tracking/characters/[角色名].md`（复制 `templates/character-sheet.md`，按层级裁减）。
 
 ---
 
@@ -258,7 +258,7 @@ L4 必填。填写压力下反应 / 对陌生人态度 / 对亲近人态度 / �
 
 ---
 
-# 三、方法论
+## 三、方法论
 
 > 以下方法论照搬自角色设计框架。操作流程中每个步骤需参考的方法论标注在步骤标题下（「方法论见 §X」）。
 
@@ -573,7 +573,13 @@ The Lie → 角色 → Want（欲望，表层目标）
 
 ---
 
-# 完成标准
+## 输出物
+
+| 交付物 | 模板 | 路径 | 用途 |
+|--------|------|------|------|
+| [角色名].md | templates/character-sheet.md | workspace/novels/{name}/tracking/characters/[角色名].md | 按层级裁减的角色档案，全生命周期维护 |
+
+## 完成标准
 
 | 层级 | 检验项 |
 |------|--------|
@@ -583,14 +589,6 @@ The Lie → 角色 → Want（欲望，表层目标）
 | **L1** | 最小必填已填充 |
 
 - [ ] → 作为初始设计时进入阶段 04：世界构建；作为写作中/审稿后/追踪时回访，返回当前写作阶段
-
----
-
-## 输出物
-
-| 交付物 | 模板 | 路径 | 用途 |
-|--------|------|------|------|
-| [角色名].md | templates/character-sheet.md | workspace/novels/{name}/tracking/characters/[角色名].md | 按层级裁减的角色档案，全生命周期维护 |
 
 ---
 

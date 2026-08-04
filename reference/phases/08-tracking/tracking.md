@@ -8,19 +8,21 @@
 
 用户说"更新台账""追踪""伏笔状态"时加载本手册。也可作为联动链 **07-定稿输出 → 08-追踪管理** 的终点环节，在定稿完成后自动加载。
 
-前置条件：章节必须已定稿（`chXX.md` 存在，无 `-draft` 后缀，阶段 07 已完成）。
+## 前置条件
+
+章节必须已定稿（`chXX.md` 存在，无 `-draft` 后缀，阶段 07 已完成）。
 
 ## 更新流程
 
 ### 1. 确认更新范围
 
 - 确定本章编号 `XX`
-- 读取 `content/chXX.md`，提取本章关键信息：新增角色、事件、伏笔、时间推进
-- 读取 `tracking/character-status.md` 和 `tracking/progress.md`（确认当前状态）
+- 读取 `workspace/novels/{name}/content/chXX.md`，提取本章关键信息：新增角色、事件、伏笔、时间推进
+- 读取 `workspace/novels/{name}/tracking/character-status.md` 和 `workspace/novels/{name}/tracking/progress.md`（确认当前状态）
 
 ### 2. 更新角色台账
 
-写入 `tracking/character-status.md`：
+写入 `workspace/novels/{name}/tracking/character-status.md`：
 
 **对新登场角色**（本章首次出现且有名字/标签的角色）：
 - 角色名、种族/身份、首次登场章节
@@ -34,11 +36,11 @@
 - 更新身体状态（新增的伤势/恢复/疲劳）
 - 更新登场记录（追加 `Ch.XX → [事件摘要]`）
 
-**如果角色台账不存在**，创建 `tracking/character-status.md` 后再写入，并需要提示用户。
+**如果角色台账不存在**，创建 `workspace/novels/{name}/tracking/character-status.md` 后再写入，并需要提示用户。
 
 ### 3. 更新进度文档
 
-写入 `tracking/progress.md`：
+写入 `workspace/novels/{name}/tracking/progress.md`：
 
 **章节概要**：追加本章摘要（2-3 句），含日期和核心事件。
 
@@ -56,23 +58,13 @@
 - 本章推进的线索 → 更新进度
 - 本章关闭的线索 → 标记已关闭
 
-如果 `tracking/progress.md` 不存在，则创建后再写入，并需要提示用户。
+如果 `workspace/novels/{name}/tracking/progress.md` 不存在，则创建后再写入，并需要提示用户。
 
 ### 4. 同步外部系统
 
 读取 `rules.md`，按其中配置的外部记忆/追踪系统指令执行同步。
 
 如果 `rules.md` 不存在或未配置外部系统，跳过此步。
-
----
-
-## 完成标准
-
-- [ ] tracking/character-status.md 已更新（新角色录入 + 已有角色状态变更）
-- [ ] tracking/progress.md 已更新（摘要 + 时间线 + 伏笔 + 线索）
-- [ ] 外部系统已同步（如 rules.md 有配置）
-- [ ] 已明确告知用户台账更新完成
-- [ ] → 流程终点。等待下一次写新章 / 审稿 / 定稿循环
 
 ---
 
@@ -83,17 +75,25 @@
 | character-status.md | — | workspace/novels/{name}/tracking/character-status.md | 角色台账（如首次创建则新建） |
 | progress.md | templates/progress.md | workspace/novels/{name}/tracking/progress.md | 进度文档（如首次创建则新建） |
 
+## 完成标准
+
+- [ ] tracking/character-status.md 已更新（新角色录入 + 已有角色状态变更）
+- [ ] tracking/progress.md 已更新（摘要 + 时间线 + 伏笔 + 线索）
+- [ ] 外部系统已同步（如 rules.md 有配置）
+- [ ] 已明确告知用户台账更新完成
+- [ ] → 流程终点。等待下一次写新章 / 审稿 / 定稿循环
+
 ## 常见错误
 
-1. **章节未定稿就更新台账。** 。如果 `chXX.md` 不存在（只有 `-draft`），先完成阶段 07 定稿再进入 08。
+1. **章节未定稿就更新台账。** 如果 `workspace/novels/{name}/content/chXX.md` 不存在（只有 `-draft`），先完成阶段 07 定稿再进入 08。
 
-2. **新角色登场但台账漏记。** 阶段 05 写作时创建的角色必须在 08 录入台账。读完本章后立即 grep `tracking/character-status.md` 确认新角色已录入。
+2. **新角色登场但台账漏记。** 阶段 05 写作时创建的角色必须在 08 录入台账。读完本章后立即检查 `workspace/novels/{name}/tracking/character-status.md` 确认新角色已录入。
 
 3. **伏笔漏记。** 写完本章时觉得某个细节"以后可能用"但没有录入 → 三章后遗忘。凡是本章新增的伏笔（包括模糊的"这个道具/对话/场景未来可能呼应"），必须先录入，后续判断是否保留。
 
-4. **只更新不读当前状态。** 更新前必须读取 `tracking/` 当前内容，不能凭记忆覆盖。
+4. **只更新不读当前状态。** 更新前必须读取 `workspace/novels/{name}/tracking/` 当前内容，不能凭记忆覆盖。
 
-5. **更新格式不统一。** 台账格式（章节编号格式、伏笔编号规则、状态标记符号）应与 `tracking/` 已有内容保持一致。如果台账为空，首次写入时建立一致格式并在后续严格遵循。
+5. **更新格式不统一。** 台账格式（章节编号格式、伏笔编号规则、状态标记符号）应与 `workspace/novels/{name}/tracking/` 已有内容保持一致。如果台账为空，首次写入时建立一致格式并在后续严格遵循。
 
 6. **忽略外部系统同步。** 如果项目 `rules.md` 配置了外部系统但 08 未同步，外部系统中的数据会比本地台账陈旧。
 
