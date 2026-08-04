@@ -25,7 +25,7 @@
 - `workspace/novels/{name}/world.md` — 世界观与设定
 - `workspace/novels/{name}/outline.md` — 大纲与卷结构
 - `workspace/novels/{name}/rules.md` — 项目风格规则
-- `workspace/novels/{name}/tracking/character-status.md` — 角色台账
+- `workspace/novels/{name}/tracking/characters/` — 角色档案（按角色名分文件）
 - `workspace/novels/{name}/tracking/progress.md` — 进度与伏笔
 
 如有缺失的文件，告知用户并建议创建。
@@ -99,7 +99,7 @@
 - 归属一致：谁说过的台词、谁拥有的物品、谁掌握的能力——与前章一致？
 - 描述一致：已登场地点外观、道具特征、种族特性——与 `world.md` 一致？
 - 时间线一致：本章日期与 `tracking/progress.md` 是否衔接？
-- 角色状态一致：能力/装备/关系与 `tracking/character-status.md` 是否呼应？
+- 角色状态一致：能力/装备/关系与 `tracking/characters/` 下角色档案是否呼应？
 
 **如果发现不一致**：
 1. 确定哪一方是权威

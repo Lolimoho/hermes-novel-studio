@@ -18,25 +18,24 @@
 
 - 确定本章编号 `XX`
 - 读取 `workspace/novels/{name}/content/chXX.md`，提取本章关键信息：新增角色、事件、伏笔、时间推进
-- 读取 `workspace/novels/{name}/tracking/character-status.md` 和 `workspace/novels/{name}/tracking/progress.md`（确认当前状态）
+- 读取 `workspace/novels/{name}/tracking/characters/` 下所有角色档案和 `workspace/novels/{name}/tracking/progress.md`（确认当前状态）
 
-### 2. 更新角色台账
+### 2. 更新角色档案
 
-写入 `workspace/novels/{name}/tracking/character-status.md`：
+角色档案已按角色名分文件存放在 `workspace/novels/{name}/tracking/characters/[角色名].md`。
+每个角色文件即其完整档案（从 `templates/character-sheet.md` 按层级裁减而来），全生命周期维护。
 
 **对新登场角色**（本章首次出现且有名字/标签的角色）：
-- 角色名、种族/身份、首次登场章节
-- 当前阶位/能力/装备
-- 与已有角色的关系（如有）
-- Lie + Want + Need（如角色在故事中有独立弧线）
+- 复制 `templates/character-sheet.md` → `workspace/novels/{name}/tracking/characters/[角色名].md`
+- 按层级（设计阶段判定的 L4/L3/L2/L1）裁剪字段
+- 填写基础信息 + 性格内核 + 当前状态 + 登场记录
 
 **对已有角色**（本章再次登场且有状态变化）：
-- 更新能力/阶位/装备变化
-- 更新人际关系温度（升温/降温/新增连接）
-- 更新身体状态（新增的伤势/恢复/疲劳）
-- 更新登场记录（追加 `Ch.XX → [事件摘要]`）
+- 更新该角色文件的 `## 当前状态` 节（阶位/身体/装备/特殊状态）
+- 更新该角色文件的 `## 登场记录` 节（追加 `Ch.XX → [关键事件]`）
+- 如关系温度变化，更新该角色文件的 `## 关系网络` 节
 
-**如果角色台账不存在**，创建 `workspace/novels/{name}/tracking/character-status.md` 后再写入，并需要提示用户。
+**如果 `tracking/characters/` 目录不存在**，创建后再写入，并需要提示用户。
 
 ### 3. 更新进度文档
 
@@ -72,12 +71,12 @@
 
 | 交付物 | 模板 | 路径 | 用途 |
 |--------|------|------|------|
-| character-status.md | — | workspace/novels/{name}/tracking/character-status.md | 角色台账（如首次创建则新建） |
+| [角色名].md（新增/更新） | templates/character-sheet.md | workspace/novels/{name}/tracking/characters/[角色名].md | 按角色分文件的角色档案，全生命周期维护 |
 | progress.md | templates/progress.md | workspace/novels/{name}/tracking/progress.md | 进度文档（如首次创建则新建） |
 
 ## 完成标准
 
-- [ ] tracking/character-status.md 已更新（新角色录入 + 已有角色状态变更）
+- [ ] `tracking/characters/` 下角色档案已更新（新角色新建 + 已有角色状态更新）
 - [ ] tracking/progress.md 已更新（摘要 + 时间线 + 伏笔 + 线索）
 - [ ] 外部系统已同步（如 rules.md 有配置）
 - [ ] 已明确告知用户台账更新完成
@@ -87,7 +86,7 @@
 
 1. **章节未定稿就更新台账。** 如果 `workspace/novels/{name}/content/chXX.md` 不存在（只有 `-draft`），先完成阶段 07 定稿再进入 08。
 
-2. **新角色登场但台账漏记。** 阶段 05 写作时创建的角色必须在 08 录入台账。读完本章后立即检查 `workspace/novels/{name}/tracking/character-status.md` 确认新角色已录入。
+2. **新角色登场但台账漏记。** 阶段 05 写作时创建的角色必须在 08 录入台账。读完本章后立即检查 `workspace/novels/{name}/tracking/characters/` 确认新角色文件已创建。
 
 3. **伏笔漏记。** 写完本章时觉得某个细节"以后可能用"但没有录入 → 三章后遗忘。凡是本章新增的伏笔（包括模糊的"这个道具/对话/场景未来可能呼应"），必须先录入，后续判断是否保留。
 
