@@ -1,8 +1,12 @@
 # 阶段 05：初稿写作
 
+## 功能简介
+
+执行写前七项检查→起草→写后八项自检的章节写作循环。最小可交付单元：一章。写作前确保上下文对齐，写作后确保一致性。
+
 ## 触发条件
 
-用户说"写第X章""继续写""下一章"时加载本手册。
+用户说"写第X章""继续写""下一章""写这个场景"时加载本手册。也作为阶段 04 完成后的自然入口。
 
 ## 写前准备
 
@@ -24,7 +28,7 @@
 
 ### 2. 检查角色台账
 
-读取 `workspace/stories/{name}/tracking/character-status.md`。
+读取 `workspace/novels/{name}/tracking/character-status.md`。
 
 确认本章涉及角色的当前状态：
 - 是否有台账中不存在的新角色登场，如有，则需要先加载`characters.md`完成角色设计
@@ -159,6 +163,12 @@ POV：[视角角色]
 
 - [ ] 章节文件已写入 `workspace/novels/{name}/content/chXX-draft.md`（非空）
 - [ ] 写后自查八项全部通过
-- [ ] 准备进入阶段 06-修订审稿（加载 `references/phases/06-revision.md`）
+- [ ] → 建议进入阶段 06：修订审稿；也可继续写下一章
 
 ---
+
+## 输出物
+
+| 交付物 | 模板 | 路径 | 用途 |
+|--------|------|------|------|
+| chXX-draft.md | — | workspace/novels/{name}/content/chXX-draft.md | 章节初稿，未定稿状态 |
