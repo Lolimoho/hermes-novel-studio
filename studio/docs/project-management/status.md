@@ -47,8 +47,13 @@
 | 事项 | 说明 | 影响 |
 |---|---|---|
 | 脚本重写 | 原 `init_project` / `stats` / `export` / `continuity` 四个脚本已从 Skill 剥离，其目录约定（`meta.json`、`chapters/`）与新结构（`brief/world/outline/content/tracking`）不兼容 | 工具化能力待重建，当前靠手工流程；应在 M1 之后以 Studio 服务形式实现，不回退到脚本 |
-| `templates/outline.md` 缺失 | 阶段 02 手册引用该模板，但 `skill/templates/` 中不存在 | 影响 02 阶段直接执行，需补模板或修正手册引用 |
-| 阶段 05 引用 `characters.md` | 05 手册写 `characters.md`，03/08 实际产出为 `tracking/characters/{角色名}.md` | 路径不一致，执行时需以 `tracking/characters/` 为准 |
+
+### 已修复（2026-11-08）
+
+- 补齐 `skill/templates/outline.md`：字段对齐阶段 02 的骨架版 / 精化版两轮产出与完成标准（终点、卷结构、角色功能需求、章级大纲、前十章场景摘要、伏笔回收、节奏检查）。
+- 阶段 05 的角色设计引用由 `characters.md` 改为 `templates/character-sheet.md` + `tracking/characters/{角色名}.md`。
+- 阶段 03 完成后的衔接改为「先回访 02 完成大纲精化，再进入 04」，与 02 手册的「阶段 03 完成后回访」保持一致。
+- 阶段 02 输出物表格补上模板列，指向 `templates/outline.md`。
 
 ## 验收证据
 

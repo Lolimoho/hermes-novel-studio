@@ -31,7 +31,7 @@
 读取 `workspace/novels/{name}/tracking/characters/` 下本章涉及的角色档案。
 
 确认本章涉及角色的当前状态：
-- 是否有台账中不存在的新角色登场，如有，则需要先加载`characters.md`完成角色设计
+- 是否有台账中不存在的新角色登场，如有，则先按 `templates/character-sheet.md` 完成角色设计，写入 `tracking/characters/{角色名}.md`
 - 上次登场章节和状态（受伤？疲劳？情绪？）
 - 当前能力/阶位/装备
 - 当前人际关系温度

@@ -138,8 +138,8 @@
 
 | 交付物 | 模板 | 路径 | 用途 |
 |--------|------|------|------|
-| outline.md（骨架版） | — | workspace/novels/{name}/outline.md | 第一轮产出：终点、卷结构、角色功能需求 |
-| outline.md（精化版） | — | workspace/novels/{name}/outline.md | 第二轮产出：在骨架版上精化，含章级大纲、弧线节点、伏笔衔接 |
+| outline.md（骨架版） | `templates/outline.md` | workspace/novels/{name}/outline.md | 第一轮产出：终点、卷结构、角色功能需求 |
+| outline.md（精化版） | `templates/outline.md` | workspace/novels/{name}/outline.md | 第二轮产出：在骨架版上精化，含章级大纲、弧线节点、伏笔衔接 |
 
 ## 完成标准（精化版）
 
