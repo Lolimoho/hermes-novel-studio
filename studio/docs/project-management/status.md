@@ -42,6 +42,14 @@
 - [ ] M0验收报告
 - [ ] 用户验收通过
 
+## Skill 侧待办
+
+| 事项 | 说明 | 影响 |
+|---|---|---|
+| 脚本重写 | 原 `init_project` / `stats` / `export` / `continuity` 四个脚本已从 Skill 剥离，其目录约定（`meta.json`、`chapters/`）与新结构（`brief/world/outline/content/tracking`）不兼容 | 工具化能力待重建，当前靠手工流程；应在 M1 之后以 Studio 服务形式实现，不回退到脚本 |
+| `templates/outline.md` 缺失 | 阶段 02 手册引用该模板，但 `skill/templates/` 中不存在 | 影响 02 阶段直接执行，需补模板或修正手册引用 |
+| 阶段 05 引用 `characters.md` | 05 手册写 `characters.md`，03/08 实际产出为 `tracking/characters/{角色名}.md` | 路径不一致，执行时需以 `tracking/characters/` 为准 |
+
 ## 验收证据
 
 尚未提交M0验收。
@@ -51,4 +59,5 @@
 | 日期 | 变更 | 原因 |
 |---|---|---|
 | 2026-09-02 | 初始化项目治理；M0设为 `IN_PROGRESS`，M1-M9锁定 | 用户确认正式启动，并要求建立Studio结构与里程碑控制 |
+| 2026-11-08 | 仓库结构落地为 `skill/` + `studio/` 双轨；Skill 内容以远程 11f6355 为方法论基准并合并本地资产 | 双轨目录正式确立；补齐 Skill 入口文档与参考资产 |
 
