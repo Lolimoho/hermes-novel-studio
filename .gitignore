@@ -18,3 +18,9 @@ build/
 
 # WorkBuddy 项目数据
 .workbuddy/
+
+# Demo 运行产物
+studio/demo/api/.venv/
+studio/demo/api/data/*.db
+studio/demo/web/node_modules/
+studio/demo/web/dist/
