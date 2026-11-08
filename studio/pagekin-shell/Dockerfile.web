@@ -1,0 +1,29 @@
+# Pagekin Web 形态：把 Electron 主进程当作服务运行
+FROM node:22-bookworm-slim
+
+WORKDIR /app
+
+# better-sqlite3 需要本地编译工具链
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends python3 make g++ ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN corepack enable \
+  && ELECTRON_SKIP_BINARY_DOWNLOAD=1 pnpm install --frozen-lockfile
+
+COPY . .
+
+RUN node_modules/.bin/vite build
+
+# 用 shim 替换 electron：主进程代码里 require('electron') 会拿到这套实现
+RUN rm -rf node_modules/electron \
+  && cp -r web/shims/electron node_modules/electron
+
+ENV NODE_ENV=production \
+    PAGEKIN_DATA_DIR=/data \
+    PORT=5180
+
+EXPOSE 5180
+
+CMD ["node", "web/server.cjs"]

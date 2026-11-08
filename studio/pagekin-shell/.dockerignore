@@ -1,0 +1,11 @@
+node_modules
+dist
+dist-electron
+build
+release
+.git
+.github
+docs
+data
+*.log
+.DS_Store

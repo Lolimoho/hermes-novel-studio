@@ -1,0 +1,87 @@
+name: novel-studio
+
+services:
+  # ---------------------------------------------------------------- Pagekin
+  pagekin:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    image: pagekin-web:dev
+    container_name: pagekin-web
+    ports:
+      - "5180:5180"
+    volumes:
+      - ./data/pagekin:/data
+      # 挂载 shim，改完重启容器即生效
+      - ./web/shims/electron:/app/node_modules/electron:ro
+    environment:
+      PAGEKIN_DATA_DIR: /data
+      PAGEKIN_PROJECTS_DIR: /data/projects
+      PORT: "5180"
+      # 容器内访问 Hermes 网关
+      HERMES_GATEWAY_URL: http://hermes:8642
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------- Hermes
+  hermes:
+    image: docker.m.daocloud.io/nousresearch/hermes-agent:latest
+    container_name: hermes
+    command: gateway run
+    ports:
+      - "8642:8642" # gateway API
+      - "9119:9119" # dashboard（HERMES_DASHBOARD=1 时可达）
+    volumes:
+      - ./data/hermes:/opt/data
+    environment:
+      HERMES_DASHBOARD: "1"
+      # 密钥从同目录 .env 读取，不写进镜像
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      MOONSHOT_API_KEY: ${MOONSHOT_API_KEY:-}
+      DASHSCOPE_API_KEY: ${DASHSCOPE_API_KEY:-}
+      ZHIPU_API_KEY: ${ZHIPU_API_KEY:-}
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------- PostgreSQL
+  postgres:
+    image: docker.m.daocloud.io/pgvector/pgvector:pg16
+    container_name: novel-pg
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-novel}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-novel_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-novel}
+    ports:
+      - "5433:5432" # 宿主机 5433，避免与本地已有 PG 冲突
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./docker/pg-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-novel} -d ${POSTGRES_DB:-novel}"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------- Hindsight
+  hindsight:
+    image: ghcr.io/vectorize-io/hindsight:latest
+    container_name: hindsight
+    ports:
+      - "8888:8888" # API
+      - "9999:9999" # 控制台
+    volumes:
+      # 指向外部 PG 时此卷只保留少量本地状态；保留以便原生模式回退
+      - ./data/hindsight:/home/hindsight/.pg0
+    environment:
+      HINDSIGHT_API_LLM_PROVIDER: ${HINDSIGHT_LLM_PROVIDER:-openai}
+      HINDSIGHT_API_LLM_API_KEY: ${HINDSIGHT_API_LLM_API_KEY:-}
+      HINDSIGHT_API_DATABASE_URL: postgresql://${POSTGRES_USER:-novel}:${POSTGRES_PASSWORD:-novel_dev_password}@postgres:5432/hindsight
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
