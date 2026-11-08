@@ -320,8 +320,47 @@ class BrowserWindow extends EventEmitter {
 
 // ---------------------------------------------------------------- 其余边界
 
+/**
+ * Web 模式没有原生文件对话框。
+ * 目录选择退化为「协议目录」：优先返回已存在的项目目录，否则返回根目录供新建。
+ * 真实目录浏览留待后续用 /fs 接口实现，这里先把主流程打通。
+ */
+const PICK_ROOT = process.env.PAGEKIN_PICK_DIR || path.join(DATA_DIR, 'projects')
+
+function findExistingProject() {
+  try {
+    const entries = fs.readdirSync(PICK_ROOT, { withFileTypes: true })
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue
+      const dir = path.join(PICK_ROOT, entry.name)
+      // Pagekin 的项目数据库在 <项目>/.ai-novel/project.db
+      if (fs.existsSync(path.join(dir, '.ai-novel', 'project.db'))) return dir
+    }
+  } catch {
+    /* 目录不存在时返回根目录 */
+  }
+  return null
+}
+
 const dialog = {
-  showOpenDialog: async () => ({ canceled: true, filePaths: [], bookmarks: [] }),
+  showOpenDialog: async (options = {}) => {
+    const properties = options.properties || []
+    if (properties.includes('openDirectory')) {
+      // 主进程用 title 区分用途：新建要父目录，打开要具体项目目录
+      const title = String(options.title || '')
+      const forCreate = title.includes('保存位置') || /choose where to save/i.test(title)
+      const chosen = forCreate ? PICK_ROOT : findExistingProject() || PICK_ROOT
+      try {
+        fs.mkdirSync(chosen, { recursive: true })
+      } catch {
+        /* 目录已存在 */
+      }
+      console.log(`[dialog] Web 模式选择目录（${forCreate ? '新建' : '打开'}）: ${chosen}`)
+      return { canceled: false, filePaths: [chosen], bookmarks: [] }
+    }
+    // 文件选择暂不支持
+    return { canceled: true, filePaths: [], bookmarks: [] }
+  },
   showOpenDialogSync: () => undefined,
   showSaveDialog: async () => ({ canceled: true, filePath: undefined, bookmark: undefined }),
   showSaveDialogSync: () => undefined,
