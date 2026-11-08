@@ -24,3 +24,6 @@ studio/demo/api/.venv/
 studio/demo/api/data/*.db
 studio/demo/web/node_modules/
 studio/demo/web/dist/
+
+# 上游源码与本地栈数据（各自独立仓库，不进主仓库）
+studio/bases/
